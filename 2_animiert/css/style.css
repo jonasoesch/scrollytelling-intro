@@ -1,0 +1,75 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#scrolly {
+  position: relative;
+}
+
+.noscrolly {
+  padding: 0;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+article {
+  position: relative;
+  padding: 0;
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+figure {
+  position: -webkit-sticky;
+  position: sticky;
+  display: flex;
+  left: 0;
+  margin: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.step {
+  margin: 0 auto 0 auto;
+  padding: 0;
+  height: 100vh;
+  border: 1px dashed #aaa;
+}
+
+.step:last-child {
+  margin-bottom: 0;
+}
+
+.step p {
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-align: center;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.sticky-img {
+  margin: 0 auto;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: scale-down;
+  overflow: hidden;
+}
+
+.animated {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  top: 0;
+}

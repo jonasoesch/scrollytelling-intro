@@ -1,31 +1,17 @@
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
-#scrolly {
-  position: relative;
-}
-
 .noscrolly {
   padding: 0;
   max-width: 60rem;
   margin: 0 auto;
 }
 
-article {
+.article {
   position: relative;
   padding: 0;
   max-width: 20rem;
   margin: 0 auto;
 }
 
-figure {
+.figure {
   position: -webkit-sticky;
   position: sticky;
   display: flex;
@@ -44,10 +30,6 @@ figure {
   padding: 0;
   height: 100vh;
   border: 1px dashed #aaa;
-}
-
-.step:last-child {
-  margin-bottom: 0;
 }
 
 .step p {

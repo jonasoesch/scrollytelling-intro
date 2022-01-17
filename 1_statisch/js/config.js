@@ -1,7 +1,7 @@
-var main = d3.select("main");
-		var scrolly = main.select("#scrolly");
-		var figure = scrolly.select("figure");
-		var article = scrolly.select("article");
+var main = d3.select(".main");
+		var scrolly = main.select(".scrolly");
+		var figure = scrolly.select(".figure");
+		var article = scrolly.select(".article");
 		var step = article.selectAll(".step");
 
         // Make a list of all the images shown during the scrolling
@@ -48,8 +48,8 @@ var main = d3.select("main");
 			// 3. bind scrollama event handlers (this can be chained like below)
 			scroller
 				.setup({
-					step: "#scrolly article .step",
-					offset: 0.8,
+					step: ".scrolly .step",
+					offset: 1,
 					debug: false
 				})
 				.onStepEnter(handleStepEnter)

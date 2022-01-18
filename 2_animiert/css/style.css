@@ -1,13 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-}
-
 #scrolly {
   position: relative;
 }
@@ -46,10 +36,6 @@ figure {
   border: 1px dashed #aaa;
 }
 
-.step:last-child {
-  margin-bottom: 0;
-}
-
 .step p {
   text-align: center;
   font-size: 18px;
@@ -67,7 +53,7 @@ figure {
   overflow: hidden;
 }
 
-.animated {
+.p5Canvas {
   position: absolute;
   margin: 0 auto;
   left: 0;

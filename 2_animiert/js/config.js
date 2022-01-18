@@ -4,16 +4,18 @@ var main = d3.select("main");
 		var article = scrolly.select("article");
 		var step = article.selectAll(".step");
 
-        // Make a list of all the images shown during the scrolling
-        const images = [... document.querySelectorAll(".step")].map(d => d.getAttribute("data-img"))
-
 		// initialize the scrollama
 		var scroller = scrollama();
 
 
 		function handleStepEnter(response) {
-			// update graphic based on step
-			figure.select("img").attr("src", images[response.index])
+
+			p.redraw = function(position) {
+				p.clear()
+				p.background("rgba(0,0,0,0.2)")
+				p.ellipse(position, position, 20, 20)
+				p.text(response.index, position-3, position+4)
+			}
 
             // Little message
             console.log("Step", response.index, "entered the stage. The direction is", response.direction)
@@ -26,8 +28,7 @@ var main = d3.select("main");
 
         function handleStepProgress(response) {
             console.log("Step", response.index, ":", response.progress*100, "%")
-			// Animate the circle-element in the SVG
-            d3.select(".animated circle").attr("cx", response.progress*370+20)
+			p.redraw(response.progress*400)
         }
 
 
@@ -66,3 +67,12 @@ var main = d3.select("main");
 
 		// kick things off
 		init();
+
+		function sketch(p) {
+			p.setup = function(){
+			  p.createCanvas(400, 400);
+			  p.noLoop()
+			}
+
+		  };
+		  let p = new p5(sketch, 'sticky');

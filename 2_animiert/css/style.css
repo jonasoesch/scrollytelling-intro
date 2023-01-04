@@ -54,8 +54,5 @@ figure {
 }
 
 .p5Canvas {
-  position: absolute;
   margin: 0 auto;
-  left: 0;
-  top: 0;
 }

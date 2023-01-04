@@ -1,60 +1,59 @@
 var main = d3.select(".main");
-		var scrolly = main.select(".scrolly");
-		var figure = scrolly.select(".figure");
-		var article = scrolly.select(".article");
-		var step = article.selectAll(".step");
+var scrolly = main.select(".scrolly");
+var figure = scrolly.select(".figure");
 
-        // Make a list of all the images shown during the scrolling
-        const images = [... document.querySelectorAll(".step")].map(d => d.getAttribute("data-img"))
+// Make a list of all the images shown during the scrolling
+// we get all the `.step`-elements and make a list of image paths from `data-img`
+const images = [... document.querySelectorAll(".step")].map(d => d.getAttribute("data-img"))
 
-		// initialize the scrollama
-		var scroller = scrollama();
-
-
-		function handleStepEnter(response) {
-			// update graphic based on step
-			figure.select("img").attr("src", images[response.index])
-
-            // Little message
-            console.log("Step", response.index, "entered the stage. The direction is", response.direction)
-		}
-
-        function handleStepExit(response) {
-            // Little message
-            console.log("Step", response.index, "exited the stage. The direction is", response.direction)
-        }
+// initialize the scrollama
+var scroller = scrollama();
 
 
-        // generic window resize listener event
-		function handleResize() {
-			// 1. update height of step elements
-			var figureHeight = window.innerHeight / 1.2;
-			var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
+function handleStepEnter(response) {
+	// update graphic based on step
+	figure.select("img").attr("src", images[response.index])
 
-			figure
-				.style("height", figureHeight + "px")
-				.style("top", figureMarginTop + "px");
+	// Little message
+	console.log("Step", response.index, "entered the stage. The direction is", response.direction)
+}
 
-			// 2. tell scrollama to update new element dimensions
-			scroller.resize();
-		}
+function handleStepExit(response) {
+	// Little message
+	console.log("Step", response.index, "exited the stage. The direction is", response.direction)
+}
 
-		function init() {
-			// 1. force a resize on load to ensure proper dimensions are sent to scrollama
-			handleResize();
 
-			// 2. setup the scroller passing options
-			// 		this will also initialize trigger observations
-			// 3. bind scrollama event handlers (this can be chained like below)
-			scroller
-				.setup({
-					step: ".scrolly .step",
-					offset: 1,
-					debug: false
-				})
-				.onStepEnter(handleStepEnter)
-                .onStepExit(handleStepExit)
-		}
+// generic window resize listener event
+function handleResize() {
+	// 1. update height of step elements
+	var figureHeight = window.innerHeight / 1.2;
+	var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
 
-		// kick things off
-		init();
+	figure
+		.style("height", figureHeight + "px")
+		.style("top", figureMarginTop + "px");
+
+	// 2. tell scrollama to update new element dimensions
+	scroller.resize();
+}
+
+function init() {
+	// 1. force a resize on load to ensure proper dimensions are sent to scrollama
+	handleResize();
+
+	// 2. setup the scroller passing options
+	// 		this will also initialize trigger observations
+	// 3. bind scrollama event handlers (this can be chained like below)
+	scroller
+		.setup({
+			step: ".scrolly .step",
+			offset: 1,
+			debug: false
+		})
+		.onStepEnter(handleStepEnter)
+		.onStepExit(handleStepExit)
+}
+
+// kick things off
+init();

@@ -1,43 +1,29 @@
 const duration = 4 // Gibt an, wie viele Sekunden Video pro Textbox gescrollt werden sollen
 
-var main = d3.select(".main");
-var scrolly = main.select(".scrolly");
-var figure = scrolly.select(".figure");
-var progress = 0
 
+// Sucht die IDs aller Elemente mit der Klasse `scrolly` raus und initialisiert ein Scrollytelling
+Array.from(document.querySelectorAll(".scrolly")).forEach(scrolly => {
+		init(scrolly.id)
+})
 
-// initialize the scrollama
-var scroller = scrollama();
-
-function handleStepProgress(response) {
+function handleStepProgress(response, id) {
+	let progress = 0
 	progress = response.progress * duration + (response.index) * duration // Rechnet die Position im Video in Sekunden aus
-	window.requestAnimationFrame(setVideo) // Performance-Optimierung. Nur neuzeichnen, wenn der Browser ready ist.
+
+	window.requestAnimationFrame(() => { setVideo(progress, id)}) // Performance-Optimierung. Nur neuzeichnen, wenn der Browser ready ist.
 }
 
-function setVideo() {
-	document.getElementById("video").currentTime = progress // Video auf die korrekte Zeit setzen
-	console.log(progress)
+function setVideo(progress, id) {
+	document.querySelector(`#${id} video`).currentTime = progress // Video auf die korrekte Zeit setzen
 }
-
-
-function handleStepEnter(response) {
-	// Little message
-	console.log("Step", response.index, "entered the stage. The direction is", response.direction)
-}
-
-function handleStepExit(response) {
-	// Little message
-	console.log("Step", response.index, "exited the stage. The direction is", response.direction)
-}
-
 
 // generic window resize listener event
-function handleResize() {
+function handleResize(id, scroller) {
 	// 1. update height of step elements
 	var figureHeight = window.innerHeight / 1.2;
 	var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
 
-	figure
+	d3.select(`#${id} .figure`)
 		.style("height", figureHeight + "px")
 		.style("top", figureMarginTop + "px");
 
@@ -45,24 +31,18 @@ function handleResize() {
 	scroller.resize();
 }
 
-function init() {
+function init(id) {
 	// 1. force a resize on load to ensure proper dimensions are sent to scrollama
-	handleResize();
+	var scroller = scrollama();
 
-	// 2. setup the scroller passing options
-	// 		this will also initialize trigger observations
-	// 3. bind scrollama event handlers (this can be chained like below)
+	handleResize(id, scroller);
+
 	scroller
 		.setup({
-			step: ".scrolly .step",
+			step: `#${id} .step`,
 			offset: 1,
 			progress: true,
 			debug: false
 		})
-		.onStepEnter(handleStepEnter)
-		.onStepExit(handleStepExit)
-		.onStepProgress(handleStepProgress)
+		.onStepProgress((response) => {handleStepProgress(response, id)})
 }
-
-// kick things off
-init();

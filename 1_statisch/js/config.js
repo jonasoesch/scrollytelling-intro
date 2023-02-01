@@ -1,16 +1,10 @@
-var main = d3.select(".main");
-var scrolly = main.select(".scrolly");
-var figure = scrolly.select(".figure");
 
-// Make a list of all the images shown during the scrolling
-// we get all the `.step`-elements and make a list of image paths from `data-img`
-const images = [... document.querySelectorAll(".step")].map(d => d.getAttribute("data-img"))
+// Sucht die IDs aller Elemente mit der Klasse `scrolly` raus und initialisiert ein Scrollytelling
+Array.from(document.querySelectorAll(".scrolly")).forEach(scrolly => {
+	init(scrolly.id)
+})
 
-// initialize the scrollama
-var scroller = scrollama();
-
-
-function handleStepEnter(response) {
+function handleStepEnter(response, images, figure) {
 	// update graphic based on step
 	figure.select("img").attr("src", images[response.index])
 
@@ -25,7 +19,7 @@ function handleStepExit(response) {
 
 
 // generic window resize listener event
-function handleResize() {
+function handleResize(figure, scroller) {
 	// 1. update height of step elements
 	var figureHeight = window.innerHeight / 1.2;
 	var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
@@ -38,22 +32,27 @@ function handleResize() {
 	scroller.resize();
 }
 
-function init() {
-	// 1. force a resize on load to ensure proper dimensions are sent to scrollama
-	handleResize();
+function init(id) {
 
-	// 2. setup the scroller passing options
-	// 		this will also initialize trigger observations
-	// 3. bind scrollama event handlers (this can be chained like below)
+	// initialize the scrollama
+	let scroller = scrollama();
+
+
+	// Make a list of all the images shown during the scrolling
+	// we get all the `.step`-elements and make a list of image paths from `data-img`
+	let images = [... document.querySelectorAll(`#${id} .step`)].map(d => d.getAttribute("data-img"))
+	let figure = d3.select(`#${id} .figure`);
+
+
+	// force a resize on load to ensure proper dimensions are sent to scrollama
+	handleResize(figure, scroller);
+
 	scroller
 		.setup({
-			step: ".scrolly .step",
+			step: `#${id} .step`,
 			offset: 1,
 			debug: false
 		})
-		.onStepEnter(handleStepEnter)
-		.onStepExit(handleStepExit)
+		.onStepEnter((response) => {handleStepEnter(response, images, figure)})
+		.onStepExit((response)  => { handleStepExit(response)})
 }
-
-// kick things off
-init();

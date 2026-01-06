@@ -23,18 +23,20 @@ function handleResize(id, scroller) {
 	var figureHeight = window.innerHeight / 1.2;
 	var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
 
-	d3.select(`#${id} .figure`)
-		.style("height", figureHeight + "px")
-		.style("top", figureMarginTop + "px");
+	let figure = document.querySelector(`#${id} .figure`)
+	if (figure) {
+		figure.style.height = figureHeight + "px"
+		figure.style.top = figureMarginTop + "px"
+	}
 
 	// 2. tell scrollama to update new element dimensions
 	scroller.resize();
 }
 
 function init(id) {
-	// 1. force a resize on load to ensure proper dimensions are sent to scrollama
 	var scroller = scrollama();
 
+	// 1. force a resize on load to ensure proper dimensions are sent to scrollama
 	handleResize(id, scroller);
 
 	scroller

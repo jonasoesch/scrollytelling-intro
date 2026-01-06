@@ -6,7 +6,10 @@ Array.from(document.querySelectorAll(".scrolly")).forEach(scrolly => {
 
 function handleStepEnter(response, images, figure) {
 	// update graphic based on step
-	figure.select("img").attr("src", images[response.index])
+	let img = figure.querySelector("img")
+	if (img) {
+		img.src = images[response.index]
+	}
 
 	// Little message
 	console.log("Step", response.index, "entered the stage. The direction is", response.direction)
@@ -24,9 +27,8 @@ function handleResize(figure, scroller) {
 	var figureHeight = window.innerHeight / 1.2;
 	var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
 
-	figure
-		.style("height", figureHeight + "px")
-		.style("top", figureMarginTop + "px");
+	figure.style.height = figureHeight + "px"
+	figure.style.top = figureMarginTop + "px"
 
 	// 2. tell scrollama to update new element dimensions
 	scroller.resize();
@@ -41,7 +43,7 @@ function init(id) {
 	// Make a list of all the images shown during the scrolling
 	// we get all the `.step`-elements and make a list of image paths from `data-img`
 	let images = [... document.querySelectorAll(`#${id} .step`)].map(d => d.getAttribute("data-img"))
-	let figure = d3.select(`#${id} .figure`);
+	let figure = document.querySelector(`#${id} .figure`)
 
 
 	// force a resize on load to ensure proper dimensions are sent to scrollama

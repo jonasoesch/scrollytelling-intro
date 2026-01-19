@@ -1,32 +1,29 @@
-var main = document.querySelector("main")
-var scrolly = main ? main.querySelector("#scrolly") : null
-var figure = scrolly ? scrolly.querySelector("figure") : null
-var article = scrolly ? scrolly.querySelector("article") : null
+const main = document.querySelector("main")
+const scrolly = main ? main.querySelector("#scrolly") : null
+const figure = scrolly ? scrolly.querySelector("figure") : null
 
 // initialize the scrollama
-var scroller = scrollama();
+const scroller = scrollama();
 
 
-let p = new p5(sketch, 'sticky'); // Neues P5-Canvas im Element mit der ID "sticky"
-function sketch(p) {              // Konfiguration:
+function sketch(p) {      // Konfiguration:
 	p.setup = function(){
 	  p.createCanvas(600, 600);
 	  p.noLoop()
 	}
 
-  };
-
-
-
-function handleStepEnter(response) { // Bei jedem neuen Step, alles löschen und mit der neuen Nummer, neu aufsetzen
-
-	p.redraw = function(position) {
+	p.redraw = function(position, number) {
 		p.clear()
 		p.background("rgba(0,0,0,0.2)") // Den grauen Hintergrund zeichnen
 		p.ellipse(position, position, 20, 20) // Weissen Kreis darauf
-		p.text(response.index, position-3, position+4) // Text mit der Nummer des aktuellen Steps
+		p.text(number, position-3, position+4) // Text mit der Nummer des aktuellen Steps
 	}
+  };
 
+const p = new p5(sketch, 'sticky'); // Neues P5-Canvas im Element mit der ID "sticky"
+
+
+function handleStepEnter(response) { // Bei jedem neuen Step, alles löschen und mit der neuen Nummer, neu aufsetzen
     console.log("Step", response.index, "entered the stage. The direction is", response.direction)
 }
 
@@ -36,15 +33,15 @@ function handleStepExit(response) {
 
 function handleStepProgress(response) {
     console.log("Step", response.index, ":", response.progress*100, "%")
-	p.redraw(response.progress*600) // Hier wird die Methode aufgerufen, die den Kreis neu zeichnet.
+	p.redraw(response.progress*600, response.index) // Hier wird die Methode aufgerufen, die den Kreis neu zeichnet.
 }
 
 
 // generic window resize listener event
 function handleResize() {
 	// 1. update height of step elements
-	var figureHeight = window.innerHeight / 1.2;
-	var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
+	const figureHeight = window.innerHeight / 1.2;
+	const figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
 
 	if (figure) {
 		figure.style.height = figureHeight + "px"
@@ -56,6 +53,10 @@ function handleResize() {
 }
 
 function init() {
+	if (!scrolly) {
+		return
+	}
+
 	// 1. force a resize on load to ensure proper dimensions are sent to scrollama
 	handleResize();
 

@@ -1,6 +1,6 @@
 const main = document.querySelector("main")
-const scrolly = main ? main.querySelector("#scrolly") : null
-const figure = scrolly ? scrolly.querySelector("figure") : null
+const scrolly = main.querySelector("#scrolly")
+const figure = scrolly.querySelector("figure")
 
 // initialize the scrollama
 const scroller = scrollama();
@@ -23,7 +23,7 @@ function sketch(p) {      // Konfiguration:
 const p = new p5(sketch, 'sticky'); // Neues P5-Canvas im Element mit der ID "sticky"
 
 
-function handleStepEnter(response) { // Bei jedem neuen Step, alles löschen und mit der neuen Nummer, neu aufsetzen
+function handleStepEnter(response) { 
     console.log("Step", response.index, "entered the stage. The direction is", response.direction)
 }
 
@@ -33,7 +33,7 @@ function handleStepExit(response) {
 
 function handleStepProgress(response) {
     console.log("Step", response.index, ":", response.progress*100, "%")
-	p.redraw(response.progress*600, response.index) // Hier wird die Methode aufgerufen, die den Kreis neu zeichnet.
+	p.redraw(response.progress*600, response.index) // Hier wird die p5 aufgerufen, das den Kreis neu zeichnet.
 }
 
 

@@ -2,7 +2,10 @@ const main = document.querySelector("main")
 const scrolly = main.querySelector("#scrolly")
 const figure = scrolly.querySelector("figure")
 
+// ------------
 // initialize the scrollama
+// More about it here: https://pudding.cool/process/introducing-scrollama/
+// ------------
 const scroller = scrollama();
 
 

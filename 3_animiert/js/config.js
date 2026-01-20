@@ -17,9 +17,24 @@ function sketch(p) {      // Konfiguration:
 
 	p.redraw = function(position, number) {
 		p.clear()
-		p.background("rgba(0,0,0,0.2)") // Den grauen Hintergrund zeichnen
-		p.ellipse(position, position, 20, 20) // Weissen Kreis darauf
+		
+		// Animated rainbow gradient
+		p.colorMode(p.HSB, 360, 100, 100);
+		for (let i = 0; i < 600; i++) {
+			let hue = (i / 600 * 360 + position * 0.6) % 360;
+			p.stroke(hue, 50, 95);
+			p.line(0, i, 600, i);
+		}
+		
+		p.colorMode(p.RGB, 255);
+		p.noStroke();
+		p.fill(255);
+		p.ellipse(position, position, 20, 20) // Erster Kreis (oben links nach unten rechts)
+		p.fill(0);
 		p.text(number, position-3, position+4) // Text mit der Nummer des aktuellen Steps
+
+		p.fill(255);
+		p.ellipse(position, 600 - position, 20, 20) // Zweiter Kreis (unten links nach oben rechts)
 	}
   };
 
@@ -27,7 +42,7 @@ const p = new p5(sketch, 'sticky'); // Neues P5-Canvas im Element mit der ID "st
 
 
 function handleStepEnter(response) { 
-    console.log("Step", response.index, "entered the stage. The direction is", response.direction)
+   console.log("Step", response.index, "entered the stage. The direction is", response.direction)
 }
 
 function handleStepExit(response) {
@@ -68,7 +83,7 @@ function init() {
 	// 3. bind scrollama event handlers (this can be chained like below)
 	scroller
 		.setup({
-			step: "#scrolly article .step",
+			step: "#scrolly .step",
 			offset: 0.8, // Die Textboxen sollen 0.8-Bildschirmhöhen Abstand haben
             progress: true,
 			debug: false

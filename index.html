@@ -4,77 +4,48 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="2_video/css/style.css" />
+	<link rel="stylesheet" href="3_animiert/css/style.css" />
 </head>
 
 <body>
-    <div class="main">
-
-		<div class="noscrolly">
-			<h1>Beispiel für einen Videoscroller</h1>
+	<main>
+		<section class="noscrolly">
+			<h1 class="wasauchimmer">Scrollytelling-Gerüst: Animierte Übergänge mit P5.js</h1>
 			<p>
 				Runterscrollen um es auszuprobieren.
 			</p>
-			<p>Obwohl der Westen nicht mehr kauft, findet Russisches Erdöl auf Umwegen weiterhin seine Abnehmer.
-				Es wird jetzt über Umwege nach Indien geschifft und in Raffinerien dort «reingewaschen».
-				Von dort findet es auch seinen Weg in die USA. Ein Beispiel:</p>
-		</div>
+			<p>Fast gleichzeitig beginnt knapp hundert Kilometer nördlich auf der Insel Euböa ebenfalls die Erde zu brennen. Doch noch konzentrieren sich die Rettungskräfte auf den Schutz der Hauptstadt. Fast ungebremst fressen sich die Flammen über den nördlichen Teil der Insel.</p>
+		</section>
 
-		<div class="scrolly" id="first">
-			<div class="figure">
-				<video class="sticky-img">
-					<source src="2_video/assets/Main.mp4" type="video/mp4">
-				</video>
-			</div>
+		<section id="scrolly">
+			<figure id="sticky">
 
-			<div class="article">
-				<div class="step">
-					<p>Am 15. Mai läuft der Öltanker Constantin Jacob aus dem Hafen in Jamnagar, Indien aus.</p>
-				</div>
-				<div class="step">
-					<p>Der Tanker durchquert den Suezkanal …</p>
-				</div>
-				<div class="step">
-					<p>… und liegt am 4. Juni in Ceuta, in der Meerenge von Gibraltar, vor Anker.</p>
-				</div>
-				<div class="step">
-					<p>Weiter zwei Wochen später, am 16. Juni kommt sie in New York an.</p>
-				</div>
-			</div>
-		</div>
+			</figure>
 
-
-		<div class="scrolly" id="second">
-			<div class="figure">
-				<video class="sticky-img">
-					<source src="2_video/assets/Main.mp4" type="video/mp4">
-				</video>
-			</div>
-
-			<div class="article">
-				<div class="step">
-					<p>Am 15. Mai läuft der Öltanker Constantin Jacob aus dem Hafen in Jamnagar, Indien aus.</p>
+			<article>
+				<div class="step"style="background: transparent;">
 				</div>
 				<div class="step">
-					<p>Der Tanker durchquert den Suezkanal …</p>
+					<p>1 Rund drei Millionen Menschen wohnen und arbeiten im Ballungsraum von Athen. Am 3. August wird die Stadt durch einen Brand am Stadtrand bedroht.</p>
 				</div>
 				<div class="step">
-					<p>… und liegt am 4. Juni in Ceuta, in der Meerenge von Gibraltar, vor Anker.</p>
+					<p>2 Schnell entwickelt sich das Feuer zu einem Flächenbrand, und erst nach zehn Tagen gelingt es den Rettungskräften, die Lage zu kontrollieren.</p>
 				</div>
-				<div class="step">
-					<p>Weiter zwei Wochen später, am 16. Juni kommt sie in New York an.</p>
+				<div class="step"">
+					<p>3 Knapp 29 km² – etwa die Fläche des Brienzersees – fallen den Flammen zum Opfer, darunter 71 Gebäude. 97 weitere wurden beschädigt, 618 könnten laut dem europäischen Erdbeobachtungsprogramm Copernicus ebenfalls in Mitleidenschaft gezogen worden sein.</p>
 				</div>
-			</div>
-		</div>
+			</article>
+		</section>
 
-		<div class="noscrolly">
-			<p>Von dort aus landet das russische Öl in Zapfsäulen über die ganze USA verteilt.</p>
-		</div>
-	</div>
+		<section class="noscrolly">
+			<p>Die Brände in Athen und Euböa (lesen Sie hier mehr über die Situation auf Euböa) sind zwei von über 140 Feuern, die in Griechenland gewütet haben. Die Hellenische Republik hat es besonders getroffen, alleine in diesem Jahr brannten 116 000 Hektare. Das ist deutlich mehr als in den letzten Jahren und mehr als doppelt so viel wie im 20-Jahre-Schnitt.</p>
+		</section>
+	</main>
 
-	<script src="2_video/js/d3.min.js"></script>
-	<script src="2_video/js/scrollama.min.js"></script>
-	<script src="2_video/js/config.js"></script>
+	<script src="3_animiert/js/d3.min.js"></script>
+	<script src="3_animiert/js/p5.min.js"></script>
+	<script src="3_animiert/js/scrollama.min.js"></script>
+	<script src="3_animiert/js/config.js"></script>
 </body>
 
 </html>

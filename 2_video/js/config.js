@@ -19,17 +19,6 @@ function setVideo(progress, id) {
 
 // generic window resize listener event
 function handleResize(id, scroller) {
-	// 1. update height of step elements
-	var figureHeight = window.innerHeight / 1.2;
-	var figureMarginTop = (window.innerHeight - figureHeight) / 1.5;
-
-	let figure = document.querySelector(`#${id} .figure`)
-	if (figure) {
-		figure.style.height = figureHeight + "px"
-		figure.style.top = figureMarginTop + "px"
-	}
-
-	// 2. tell scrollama to update new element dimensions
 	scroller.resize();
 }
 
